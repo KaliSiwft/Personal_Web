@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-const EMAIL = 'hello@example.com';
+const EMAIL = 'kali.taylorswift@gmail.com';
 
 test.use({ permissions: ['clipboard-read', 'clipboard-write'] });
 
@@ -19,8 +19,8 @@ test.describe('个人名片 MVP 验收标准', () => {
 
   test('首屏包含姓名、定位文案与邮箱入口', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('.name')).toHaveText('陈晨');
-    await expect(page.locator('.tagline')).toHaveText('前端工程师 / 独立开发者');
+    await expect(page.locator('.name')).toHaveText('Sean');
+    await expect(page.locator('.tagline')).toHaveText('后端工程师 / 独立开发者');
     const emailBtn = page.locator('.copy-btn').first();
     await expect(emailBtn).toBeVisible();
     await expect(emailBtn).toContainText(EMAIL);
@@ -47,7 +47,7 @@ test.describe('个人名片 MVP 验收标准', () => {
     await page.goto('/');
     const links = page.locator('a.social-link');
     await expect(links).toHaveCount(2);
-    await expect(links.nth(0)).toHaveAttribute('href', 'https://github.com/yourname');
+    await expect(links.nth(0)).toHaveAttribute('href', 'https://github.com/KaliSiwft');
     await expect(links.nth(1)).toHaveAttribute('href', 'https://www.linkedin.com/in/yourname');
     for (const link of await links.all()) {
       await expect(link).toHaveAttribute('target', '_blank');
@@ -57,7 +57,7 @@ test.describe('个人名片 MVP 验收标准', () => {
 
   test('页面标题、描述与 favicon 配置完整', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveTitle(/陈晨/);
+    await expect(page).toHaveTitle(/Sean/);
     const description = await page.getAttribute('meta[name="description"]', 'content');
     expect(description?.trim()).toBeTruthy();
     const favicon = await page.getAttribute('link[rel="icon"]', 'href');
